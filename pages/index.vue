@@ -3,4 +3,5 @@
         <h1>Markdown tables made easy</h1>
         <p>Get started by inserting your data in the table below!</p>
     </article>
+    <TableEditor />
 </template>
