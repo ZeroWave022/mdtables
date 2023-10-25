@@ -127,19 +127,6 @@
             </table>
         </div>
 
-        <div class="prose">
-            <pre class="whitespace-pre-line">
-                | Header 1 | Header 2 | Header 3 | Header 4 | Header 5 |
-                |----------|----------|----------|----------|----------|
-                | Template | Template | Template | Template | Template |
-                | Template | Template | Template | Template | Template |
-                | Template | Template | Template | Template | Template |
-                | Template | Template | Template | Template | Template |
-            </pre>
-
-            <button class="btn btn-outline btn-primary mx-auto block">
-                Copy to clipboard
-            </button>
-        </div>
+        <TableOutput :data="table" />
     </div>
 </template>
