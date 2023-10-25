@@ -52,6 +52,7 @@
             <input
                 class="textarea textarea-bordered"
                 v-model="newCellData.content"
+                autofocus
             />
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
