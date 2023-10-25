@@ -1,9 +1,12 @@
 <script setup lang="ts">
     import { markdownTable } from "markdown-table";
+    import { InformationCircleIcon } from "@heroicons/vue/24/outline";
 
     const props = defineProps<{
         data: TableCellData[][];
     }>();
+
+    const showingAlert = ref(false);
 
     const mdTable = computed(() => {
         const data = removeEmptyRows(props.data);
@@ -31,6 +34,15 @@
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(mdTable.value);
+        showAlert();
+    };
+
+    const showAlert = () => {
+        showingAlert.value = true;
+
+        setTimeout(() => {
+            showingAlert.value = false;
+        }, 5000);
     };
 </script>
 
@@ -44,5 +56,13 @@
         >
             Copy to clipboard
         </button>
+
+        <div
+            :class="!showingAlert ? 'opacity-0' : 'opacity-100'"
+            class="alert alert-info absolute bottom-10 left-0 w-1/2 translate-x-1/2 duration-150 ease-in"
+        >
+            <InformationCircleIcon class="w-6 h-6" />
+            <span>Copied to clipboard!</span>
+        </div>
     </div>
 </template>
