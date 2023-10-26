@@ -35,67 +35,45 @@
         return letters;
     };
 
-    // Limit columns and rows to the 1-50 range
     watch(columns, (newColumns, oldColumns) => {
-        columns.value = newColumns < 50 ? (newColumns < 1 ? 1 : newColumns) : 50;
+        columns.value = newColumns < 50 ? (newColumns < 1 ? 1 : newColumns) : 50; // Limit columns to 1-50 range
+        const addedCols = columns.value - oldColumns;
 
-        if (oldColumns < newColumns) {
+        if (addedCols >= 1) {
+            const newCols = Array.from({ length: addedCols }, () => createTableCell());
             for (let row of table.value) {
-                row.push(createTableCell());
+                row.push(...newCols);
             }
-        } else if (newColumns < oldColumns) {
+        } else if (addedCols < 0) {
             for (let row of table.value) {
-                row.pop();
+                row.splice(row.length + addedCols, -addedCols);
             }
         }
     });
 
     watch(rows, (newRows, oldRows) => {
-        rows.value = newRows < 50 ? (newRows < 1 ? 1 : newRows) : 50;
+        rows.value = newRows < 50 ? (newRows < 1 ? 1 : newRows) : 50; // Limit rows to 1-50 range
+        const addedRows = rows.value - oldRows;
 
-        if (oldRows < newRows) {
-            table.value.push(new Array(columns.value).fill(createTableCell()));
-        } else if (newRows < oldRows) {
-            table.value.pop();
+        if (addedRows >= 1) {
+            for (let i = 0; i < addedRows; i++) {
+                table.value.push(Array.from({ length: columns.value }, () => createTableCell()));
+            }
+        } else if (addedRows < 0) {
+            table.value = table.value.slice(0, table.value.length + addedRows)
         }
     });
+
+    const settingsUpdate = (newColumns: number, newRows: number) => {
+        columns.value = newColumns;
+        rows.value = newRows;
+    }
 </script>
 
 <template>
-    <div class="flex flex-col gap-5">
-        <div class="flex justify-between gap-5">
-            <div>
-                <label for="columns" class="label label-text">Columns</label>
-                <input
-                    id="columns"
-                    v-model="columns"
-                    class="input input-bordered"
-                    name="rows"
-                    type="number"
-                    min="1"
-                    max="100"
-                    placeholder="5"
-                    required
-                />
-            </div>
-            <div>
-                <label for="rows" class="label label-text">Rows</label>
-                <input
-                    id="rows"
-                    v-model="rows"
-                    class="input input-bordered"
-                    name="rows"
-                    type="number"
-                    min="1"
-                    max="100"
-                    placeholder="5"
-                    required
-                />
-            </div>
-        </div>
-
-        <div class="p-4 mx-auto bg-base-200 rounded-md shadow-md">
-            <table class="">
+    <div class="flex flex-col gap-5 p-5">
+        <div class="flex flex-col gap-3 justify-center items-center relative p-4 bg-base-200 rounded-md shadow-md">
+            <table>
                 <tbody
                     class="[&_td]:border [&_td]:border-neutral"
                     v-for="(row, index) in table"
@@ -110,7 +88,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="border-none hover:bg-base-100 p-1.5">
+                        <td class="border-none hover:bg-base-100 p-1.5 text-center">
                             {{ index + 1 }}
                         </td>
                         <td
@@ -125,6 +103,7 @@
                     </tr>
                 </tbody>
             </table>
+            <TableSettings :columns="columns" :rows="rows" @settings-update="settingsUpdate" />
         </div>
 
         <TableOutput :data="table" />
