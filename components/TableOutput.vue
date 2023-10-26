@@ -59,7 +59,7 @@
 
         <div
             :class="!showingAlert ? 'opacity-0 invisible' : 'opacity-100 visible'"
-            class="alert alert-info absolute bottom-10 left-0 w-1/2 translate-x-1/2 duration-150 ease-in"
+            class="alert alert-info fixed bottom-[10vh] left-0 w-1/2 translate-x-1/2 duration-150 ease-in"
         >
             <InformationCircleIcon class="w-6 h-6" />
             <span>Copied to clipboard!</span>
