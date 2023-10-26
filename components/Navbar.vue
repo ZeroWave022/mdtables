@@ -1,5 +1,7 @@
 <script setup>
 import { Bars3Icon } from "@heroicons/vue/24/solid";
+
+const darkModeOn = useState("darkModeOn");
 </script>
 
 <template>
@@ -18,7 +20,10 @@ import { Bars3Icon } from "@heroicons/vue/24/solid";
                     <li><NuxtLink to="#">About</NuxtLink></li>
                 </ul>
             </div>
-            <span>.mdTables</span>
+            <NuxtLink to="/" class="flex items-center gap-2">
+                <img src="/md-logo.svg" alt="Markdown logo" class="w-8 h-auto" :class="{ 'invert': darkModeOn }">
+                .mdTables
+            </NuxtLink>
         </div>
         <div class="navbar-center hidden md:flex gap-5">
             <NuxtLink to="/">Home</NuxtLink>
