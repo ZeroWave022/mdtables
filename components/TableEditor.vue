@@ -63,9 +63,9 @@
 
 <template>
     <div class="flex flex-col gap-5">
-        <div class="flex justify-around">
-            <div class="flex gap-2 items-center">
-                <label for="columns">Columns: </label>
+        <div class="flex justify-between gap-5">
+            <div>
+                <label for="columns" class="label label-text">Columns</label>
                 <input
                     id="columns"
                     v-model="columns"
@@ -78,8 +78,8 @@
                     required
                 />
             </div>
-            <div class="flex gap-2 items-center">
-                <label for="rows">Rows: </label>
+            <div>
+                <label for="rows" class="label label-text">Rows</label>
                 <input
                     id="rows"
                     v-model="rows"
