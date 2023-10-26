@@ -3,12 +3,19 @@
     import { InformationCircleIcon } from "@heroicons/vue/24/outline";
 
     const props = defineProps<{
-        data: TableCellData[][];
+        data?: TableCellData[][];
+        preparedData?: string[][] | null;
     }>();
 
     const showingAlert = ref(false);
 
     const mdTable = computed(() => {
+        if (props.preparedData) {
+            return markdownTable(props.preparedData);
+        } else if (!props.data) {
+            return null;
+        }
+
         const data = removeEmptyRows(props.data);
 
         return markdownTable(
@@ -33,6 +40,7 @@
     };
 
     const copyToClipboard = () => {
+        if (!mdTable.value) return;
         navigator.clipboard.writeText(mdTable.value);
         showAlert();
     };
@@ -47,7 +55,7 @@
 </script>
 
 <template>
-    <div class="prose" v-if="mdTable.length != 0">
+    <div class="prose" v-if="mdTable && mdTable.length != 0">
         <pre>{{ mdTable }}</pre>
 
         <button
