@@ -10,7 +10,7 @@ useHead({
 </script>
 
 <template>
-    <div class="flex flex-col items-center gap-2 min-h-screen">
+    <div class="flex flex-col items-center gap-16 min-h-screen">
         <Navbar />
         <main class="flex flex-col items-center flex-1 gap-12">
             <NuxtPage />
