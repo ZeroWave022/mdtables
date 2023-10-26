@@ -48,11 +48,13 @@
                     Italic
                 </button>
             </div>
-            <label class="label label-text">Cell data</label>
+            <label class="label label-text" :for="`cell-data-${cellId}`">Cell data</label>
             <input
-                class="textarea textarea-bordered"
+                :id="`cell-data-${cellId}`"
+                class="input input-bordered"
                 v-model="newCellData.content"
                 autofocus
+                autocomplete="off"
             />
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
