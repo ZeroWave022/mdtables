@@ -65,4 +65,7 @@
             <span>Copied to clipboard!</span>
         </div>
     </div>
+    <p v-else>
+        No table generated: No data found
+    </p>
 </template>
