@@ -48,7 +48,7 @@
 
 <template>
     <div class="prose" v-if="mdTable.length != 0">
-        <pre class="whitespace-pre-line">{{ mdTable }}</pre>
+        <pre>{{ mdTable }}</pre>
 
         <button
             class="btn btn-outline btn-primary mx-auto block"
