@@ -13,17 +13,17 @@ import { Bars3Icon } from "@heroicons/vue/24/solid";
                     tabindex="0"
                     class="dropdown-content z-10 menu p-2 shadow-md bg-base-200 rounded-box w-52"
                 >
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
+                    <li><NuxtLink to="/">Home</NuxtLink></li>
+                    <li><NuxtLink to="/from-file">Create from file</NuxtLink></li>
+                    <li><NuxtLink to="#">About</NuxtLink></li>
                 </ul>
             </div>
             <span>.mdTables</span>
         </div>
         <div class="navbar-center hidden md:flex gap-5">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <NuxtLink to="/">Home</NuxtLink>
+            <NuxtLink to="/from-file">Create from file</NuxtLink>
+            <NuxtLink to="#">About</NuxtLink>
         </div>
         <div class="navbar-end">
             <ThemeToggle />
