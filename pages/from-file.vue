@@ -15,14 +15,14 @@
             const file = input.files[0];
 
             reader.addEventListener("load", () => {
-                if (typeof reader.result != "string") {
+                if (typeof reader.result !== "string") {
                     return (error.value =
                         "Wrong file content (couldn't be read as text)");
                 }
 
-                if (file.type == "application/json") {
+                if (file.type === "application/json") {
                     processJSONContent(reader.result);
-                } else if (file.type == "text/csv") {
+                } else if (file.type === "text/csv") {
                     processCSVContent(reader.result);
                 } else {
                     error.value = "Unsupported file format";
@@ -34,9 +34,9 @@
     };
 
     const processJSONContent = (text: string) => {
-        let content;
+        let content: UserJSONContent;
         try {
-            content = JSON.parse(text);
+            content = JSON.parse(text) as UserJSONContent;
         } catch {
             return (error.value = "Failed to parse JSON. Check the file input");
         }
@@ -48,7 +48,7 @@
 
         const hasArrays = content.some((e) => Array.isArray(e));
         const hasObjects = content.some(
-            (e) => !Array.isArray(e) && typeof e == "object" && e != null
+            (e) => !Array.isArray(e) && typeof e === "object" && e !== null
         );
 
         if (hasArrays && hasObjects) {
@@ -57,25 +57,25 @@
         }
 
         if (hasArrays) {
-            return (processedContent.value = content);
+            return (processedContent.value = content as string[][]);
         }
 
-        let processedArray = new Array();
+        const processedArray = new Array<string[]>();
 
         // Add keys of row 0 as table headers, then push all rows of data
         processedArray.push(Object.keys(content[0]));
-        content.forEach((item) => processedArray.push(Object.values(item)));
+        content.forEach((item) => processedArray.push(Object.values(item) as string[]));
 
         processedContent.value = processedArray;
     };
 
     const processCSVContent = (text: string) => {
         const parser = parse();
-        let records: string[][] = new Array();
+        const records = new Array<string[]>();
 
         parser.on("readable", () => {
             let record;
-            while ((record = parser.read()) !== null) {
+            while ((record = parser.read() as string[]) !== null) {
                 records.push(record);
             }
         });
@@ -94,40 +94,41 @@
 </script>
 
 <template>
-    <section class="prose prose-md text-center">
-        <h1>Convert file to Markdown table</h1>
-        <p>Upload your file below to convert it to a markdown table</p>
-        <p>Supported file formats: <code>.json</code> and <code>.csv</code></p>
-    </section>
+    <div class="flex flex-col gap-12 prose text-center">
+        <section>
+            <h1>Convert file to Markdown table</h1>
+            <p>Upload your file below to convert it to a markdown table</p>
+            <p>Supported file formats: <code>.json</code> and <code>.csv</code></p>
+        </section>
 
-    <div class="form-control">
-        <label class="label" for="file-input">
-            <span class="label-text">Select file to convert</span>
-        </label>
-        <input
-            class="file-input file-input-bordered"
-            @change="fileUploaded($event)"
-            type="file"
-            id="file-input"
-            accept=".json, .csv"
+        <div class="form-control">
+            <label class="label" for="file-input">
+                <span class="label-text">Select file to convert</span>
+            </label>
+            <input
+                id="file-input"
+                class="file-input file-input-bordered"
+                type="file"
+                accept=".json, .csv"
+                @change="fileUploaded($event)"
+            />
+        </div>
+
+        <p v-if="error" class="text-error">
+            <ExclamationTriangleIcon class="w-8 h-8 inline" />
+            There was an error while reading the content of this file.<br />
+            Details: {{ error }}.
+        </p>
+
+        <TableOutput
+            v-if="processedContent && !error"
+            :prepared-data="processedContent"
         />
-    </div>
 
-    <p class="text-error text-center" v-if="error">
-        <ExclamationTriangleIcon class="w-8 h-8 inline" />
-        There was an error while reading the content of this file.<br />
-        Details: {{ error }}.
-    </p>
-
-    <TableOutput
-        v-if="processedContent && !error"
-        :prepared-data="processedContent"
-    />
-
-    <section class="prose">
-        <h2>File examples</h2>
-        <h3>JSON-file: 2D Array format</h3>
-        <pre>
+        <section>
+            <h2>File examples</h2>
+            <h3>JSON-file: 2D Array format</h3>
+            <pre class="text-left">
 [
     [
         "Product",
@@ -155,10 +156,10 @@
         "In 5 days"
     ]
 ]
-        </pre>
+            </pre>
 
-        <h3>JSON-file: Array of objects format</h3>
-        <pre>
+            <h3>JSON-file: Array of objects format</h3>
+            <pre class="text-left">
 [
     {
         "Product": "Bread",
@@ -181,15 +182,16 @@
         "Next delivery": "In 5 days"
     }
 ]
-        </pre>
+            </pre>
 
-        <h3>CSV</h3>
-        <pre class="whitespace-pre-line">
-            Product,Price,Next delivery
-            Bread,10,Today
-            Butter,25,Tomorrow
-            Milk,25,Tomorrow
-            Ice cream,40,In 5 days
-        </pre>
-    </section>
+            <h3>CSV</h3>
+            <pre class="whitespace-pre-line text-left">
+                Product,Price,Next delivery
+                Bread,10,Today
+                Butter,25,Tomorrow
+                Milk,25,Tomorrow
+                Ice cream,40,In 5 days
+            </pre>
+        </section>
+    </div>
 </template>

@@ -24,7 +24,7 @@
         <span>Table Settings</span>
     </button>
 
-    <dialog ref="modal" id="table-settings-modal" class="modal">
+    <dialog id="table-settings-modal" ref="modal" class="modal">
         <div class="modal-box prose">
             <h3>Table Settings</h3>
             <div class="flex gap-5">
@@ -57,7 +57,7 @@
                     />
                 </div>
             </div>
-            <p class="text-warning" v-if="newColumns < columns || newRows < rows">
+            <p v-if="newColumns < columns || newRows < rows" class="text-warning">
                 <ExclamationCircleIcon class="w-8 h-8 inline"/>
                 When removing rows/columns, any data in those table cells will be deleted
             </p>

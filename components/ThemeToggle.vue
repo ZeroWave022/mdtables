@@ -11,7 +11,7 @@ onMounted(() => {
 
     // Use saved localStorage preference if available, else set to media query
     darkModeOn.value = savedPreference
-        ? savedPreference == "on"
+        ? savedPreference === "on"
         : prefersDarkMode;
 
     localStorage.setItem("darkModeOn", darkModeOn.value ? "on" : "off");
@@ -36,9 +36,9 @@ useHead({
 
 const toggleTheme = () => {
     const oldPreference = localStorage.getItem("darkModeOn");
-    const newPreference = oldPreference == "on" ? "off" : "on";
+    const newPreference = oldPreference === "on" ? "off" : "on";
 
-    darkModeOn.value = newPreference == "on";
+    darkModeOn.value = newPreference === "on";
     localStorage.setItem("darkModeOn", newPreference);
     document.documentElement.setAttribute(
         "data-theme",

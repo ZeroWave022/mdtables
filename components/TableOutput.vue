@@ -24,9 +24,9 @@
     });
 
     const removeEmptyRows = (table: TableCellData[][]) => {
-        let newTable = [];
-        for (let row of table) {
-            if (row.filter((cell) => cell.content == "").length != row.length)
+        const newTable = [];
+        for (const row of table) {
+            if (row.filter((cell) => cell.content === "").length !== row.length)
                 newTable.push(row);
         }
         return newTable;
@@ -41,8 +41,7 @@
 
     const copyToClipboard = () => {
         if (!mdTable.value) return;
-        navigator.clipboard.writeText(mdTable.value);
-        showAlert();
+        navigator.clipboard.writeText(mdTable.value).then(() => showAlert()).catch(() => {});
     };
 
     const showAlert = () => {
@@ -55,7 +54,7 @@
 </script>
 
 <template>
-    <div class="prose" v-if="mdTable && mdTable.length != 0">
+    <div v-if="mdTable && mdTable.length != 0" class="prose" >
         <pre>{{ mdTable }}</pre>
 
         <button

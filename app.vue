@@ -11,8 +11,8 @@ useHead({
 
 <template>
     <div class="flex flex-col items-center gap-16 min-h-screen">
-        <Navbar />
-        <main class="flex flex-col items-center flex-1 gap-12">
+        <PageNavbar />
+        <main class="flex-1">
             <NuxtPage />
         </main>
         <PageFooter />

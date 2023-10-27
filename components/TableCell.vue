@@ -15,7 +15,7 @@
 
     const resetData = () => {
         // Resets newCellData back to parent state, so changes that weren't applied do not persist
-        newCellData.value = Object.assign({ ...props.modelValue });
+        newCellData.value = Object.assign({ ...props.modelValue }) as TableCellData;
     };
 
     const openModal = () => {
@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <button @click="openModal" class="empty:block empty:w-6 empty:h-8 p-1.5">
+    <button class="empty:block empty:w-6 empty:h-8 p-1.5" @click="openModal">
         {{ modelValue.content }}
     </button>
     <dialog ref="modal" class="modal">
@@ -51,14 +51,14 @@
             <label class="label label-text" :for="`cell-data-${cellId}`">Cell data</label>
             <input
                 :id="`cell-data-${cellId}`"
-                class="input input-bordered"
                 v-model="newCellData.content"
+                class="input input-bordered"
                 autofocus
                 autocomplete="off"
             />
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
-                    <button @click="emitNewData" class="btn btn-success">
+                    <button class="btn btn-success" @click="emitNewData" >
                         Apply
                     </button>
                     <button class="btn" @click="resetData">Cancel</button>
