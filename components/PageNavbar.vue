@@ -16,12 +16,19 @@ const darkModeOn = useState("darkModeOn");
                     class="dropdown-content z-10 menu p-2 shadow-md bg-base-200 rounded-box w-52"
                 >
                     <li><NuxtLink to="/">Home</NuxtLink></li>
-                    <li><NuxtLink to="/from-file">Create from file</NuxtLink></li>
+                    <li>
+                        <NuxtLink to="/from-file">Create from file</NuxtLink>
+                    </li>
                     <li><NuxtLink to="#">About</NuxtLink></li>
                 </ul>
             </div>
             <NuxtLink to="/" class="flex items-center gap-2">
-                <img src="/md-logo.svg" alt="Markdown logo" class="w-8 h-auto" :class="{ 'invert': darkModeOn }">
+                <img
+                    src="/md-logo.svg"
+                    alt="Markdown logo"
+                    class="w-8 h-auto"
+                    :class="{ invert: darkModeOn }"
+                />
                 .mdTables
             </NuxtLink>
         </div>

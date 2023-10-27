@@ -1,21 +1,24 @@
 <script setup lang="ts">
-    import { Cog6ToothIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
+import {
+    Cog6ToothIcon,
+    ExclamationCircleIcon,
+} from "@heroicons/vue/24/outline";
 
-    const props = defineProps<{
-        columns: number;
-        rows: number;
-    }>();
+const props = defineProps<{
+    columns: number;
+    rows: number;
+}>();
 
-    defineEmits<{
-        (e: "settingsUpdate", columns: number, rows: number): void
-    }>();
+defineEmits<{
+    (e: "settingsUpdate", columns: number, rows: number): void;
+}>();
 
-    const newColumns = ref(props.columns);
-    const newRows = ref(props.rows);
+const newColumns = ref(props.columns);
+const newRows = ref(props.rows);
 
-    const modal = ref<null | { showModal: () => void }>(null);
+const modal = ref<null | { showModal: () => void }>(null);
 
-    const openModal = () => modal.value?.showModal();
+const openModal = () => modal.value?.showModal();
 </script>
 
 <template>
@@ -29,7 +32,9 @@
             <h3>Table Settings</h3>
             <div class="flex gap-5">
                 <div>
-                    <label for="columns" class="label label-text">Columns</label>
+                    <label for="columns" class="label label-text"
+                        >Columns</label
+                    >
                     <input
                         id="columns"
                         v-model="newColumns"
@@ -57,18 +62,23 @@
                     />
                 </div>
             </div>
-            <p v-if="newColumns < columns || newRows < rows" class="text-warning">
-                <ExclamationCircleIcon class="w-8 h-8 inline"/>
-                When removing rows/columns, any data in those table cells will be deleted
+            <p
+                v-if="newColumns < columns || newRows < rows"
+                class="text-warning"
+            >
+                <ExclamationCircleIcon class="w-8 h-8 inline" />
+                When removing rows/columns, any data in those table cells will
+                be deleted
             </p>
             <div class="modal-action">
                 <form method="dialog" class="flex gap-3">
-                    <button class="btn btn-success" @click="$emit('settingsUpdate', newColumns, newRows)">
+                    <button
+                        class="btn btn-success"
+                        @click="$emit('settingsUpdate', newColumns, newRows)"
+                    >
                         Apply
                     </button>
-                    <button class="btn">
-                        Close
-                    </button>
+                    <button class="btn">Close</button>
                 </form>
             </div>
         </div>

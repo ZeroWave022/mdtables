@@ -1,27 +1,25 @@
 module.exports = {
     env: {
-        "browser": true,
-        "es2021": true
+        browser: true,
+        es2021: true,
     },
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended-type-checked",
         "plugin:vue/vue3-recommended",
         "@nuxtjs/eslint-config-typescript",
-        "prettier"
+        "prettier",
     ],
     overrides: [
         {
             env: {
-                "node": true
+                node: true,
             },
-            files: [
-                ".eslintrc.{js,cjs}"
-            ],
+            files: [".eslintrc.{js,cjs}"],
             parserOptions: {
-                sourceType: "script"
-            }
-        }
+                sourceType: "script",
+            },
+        },
     ],
     parser: "vue-eslint-parser",
     parserOptions: {
@@ -30,17 +28,9 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         ecmaVersion: "latest",
         sourceType: "module",
-        extraFileExtensions: [".vue"]
+        extraFileExtensions: [".vue"],
     },
-    plugins: [
-        "@typescript-eslint",
-        "vue"
-    ],
-    ignorePatterns: [
-        ".eslintrc.cjs",
-        "nuxt.config.ts",
-        "tailwind.config.js"
-    ],
-    rules: {
-    }
-}
+    plugins: ["@typescript-eslint", "vue"],
+    ignorePatterns: [".eslintrc.cjs", "nuxt.config.ts", "tailwind.config.js"],
+    rules: {},
+};
