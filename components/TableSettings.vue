@@ -22,7 +22,7 @@ const openModal = () => modal.value?.showModal();
 </script>
 
 <template>
-    <button class="btn btn-info" @click="openModal">
+    <button class="btn btn-primary" @click="openModal">
         <Cog6ToothIcon class="w-6 h-6" />
         <span>Table Settings</span>
     </button>
@@ -32,9 +32,9 @@ const openModal = () => modal.value?.showModal();
             <h3>Table Settings</h3>
             <div class="flex gap-5">
                 <div>
-                    <label for="columns" class="label label-text"
-                        >Columns</label
-                    >
+                    <label for="columns" class="label label-text">
+                        Columns
+                    </label>
                     <input
                         id="columns"
                         v-model="newColumns"

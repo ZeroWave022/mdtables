@@ -48,9 +48,9 @@ const openModal = () => {
                     Italic
                 </button>
             </div>
-            <label class="label label-text" :for="`cell-data-${cellId}`"
-                >Cell data</label
-            >
+            <label class="label label-text" :for="`cell-data-${cellId}`">
+                Cell data
+            </label>
             <input
                 :id="`cell-data-${cellId}`"
                 v-model="newCellData.content"
