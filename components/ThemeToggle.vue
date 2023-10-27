@@ -19,9 +19,9 @@ onMounted(() => {
 
 /* Non-minified version of the script in useHead:
 if (localStorage.getItem("darkModeOn")) {
-    document.documentElement.setAttribute("data-theme", localStorage.getItem("darkModeOn") == "on" ? "night" : "light");
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("darkModeOn") == "on" ? "night" : "emerald");
 } else {
-    document.documentElement.setAttribute("data-theme", window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+    document.documentElement.setAttribute("data-theme", window.matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "emerald");
 }
 */
 
@@ -29,7 +29,7 @@ useHead({
     script: [
         {
             innerHTML:
-                "localStorage.getItem('darkModeOn')?document.documentElement.setAttribute('data-theme',localStorage.getItem('darkModeOn')=='on'?'night':'light'):document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'light');",
+                "localStorage.getItem('darkModeOn')?document.documentElement.setAttribute('data-theme',localStorage.getItem('darkModeOn')=='on'?'night':'emerald'):document.documentElement.setAttribute('data-theme',window.matchMedia('(prefers-color-scheme: dark)').matches?'night':'emerald');",
         },
     ],
 });
@@ -42,7 +42,7 @@ const toggleTheme = () => {
     localStorage.setItem("darkModeOn", newPreference);
     document.documentElement.setAttribute(
         "data-theme",
-        darkModeOn.value ? "night" : "light",
+        darkModeOn.value ? "night" : "emerald",
     );
 };
 </script>
