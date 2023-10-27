@@ -100,9 +100,6 @@ const processCSVContent = (text: string) => {
         <section>
             <h1>Convert file to Markdown table</h1>
             <p>Upload your file below to convert it to a markdown table</p>
-            <p>
-                Supported file formats: <code>.json</code> and <code>.csv</code>
-            </p>
         </section>
 
         <div class="form-control">
@@ -130,8 +127,11 @@ const processCSVContent = (text: string) => {
         />
 
         <section>
+            <span>
+                Supported file formats: <code>.json</code> and <code>.csv</code>
+            </span>
             <h2>File examples</h2>
-            <h3>JSON-file: 2D Array format</h3>
+            <h3>JSON file: 2D Array format</h3>
             <pre class="text-left">
 [
     [
@@ -162,7 +162,7 @@ const processCSVContent = (text: string) => {
 ]
             </pre>
 
-            <h3>JSON-file: Array of objects format</h3>
+            <h3>JSON file: Array of objects format</h3>
             <pre class="text-left">
 [
     {
