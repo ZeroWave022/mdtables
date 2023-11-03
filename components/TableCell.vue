@@ -26,7 +26,7 @@ const openModal = () => {
 </script>
 
 <template>
-    <button class="empty:block empty:w-6 empty:h-8 p-1.5" @click="openModal">
+    <button class="empty:block empty:min-w-[1.5rem] empty:w-full empty:h-8 p-1.5" @click="openModal">
         {{ modelValue.content }}
     </button>
     <dialog ref="modal" class="modal">
